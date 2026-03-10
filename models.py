@@ -12,3 +12,6 @@ class LogEntryModel(Base):
     application = Column(String, nullable=False)
     level = Column(String, nullable=False)
     message = Column(String, nullable=False)
+    name = Column(String, nullable=True)
+    funcName = Column(String, nullable=True)
+    lineno = Column(Integer, nullable=True)

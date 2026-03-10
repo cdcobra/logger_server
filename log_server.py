@@ -11,6 +11,9 @@ class LogEntry(BaseModel):
     application: str
     level: str
     message: str
+    name: str | None
+    funcName: str | None
+    lineno: int | None
 
 @app.post("/log")
 async def receive_log(entry: LogEntry, session: AsyncSession = Depends(get_session)):
@@ -19,7 +22,10 @@ async def receive_log(entry: LogEntry, session: AsyncSession = Depends(get_sessi
         application=entry.application,
         level=entry.level.upper(),
         message=entry.message,
-        ins_date=datetime.datetime.now(tz=datetime.timezone.utc)
+        ins_date=datetime.datetime.now(tz=datetime.timezone.utc),
+        name=entry.name,
+        funcName=entry.funcName,
+        lineno=entry.lineno
     )
     session.add(log_record)
     await session.commit()
