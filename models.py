@@ -8,7 +8,7 @@ class LogEntryModel(Base):
     __table_args__ = {"schema": SCHEMA_NAME}
 
     id = Column(Integer, primary_key=True, index=True)
-    ins_date = Column(DateTime(timezone=True), nullable=False, default=datetime.datetime.now(tz=datetime.timezone.utc))
+    ins_date = Column(DateTime(timezone=True), nullable=False)
     application = Column(String, nullable=False)
     level = Column(String, nullable=False)
     message = Column(String, nullable=False)

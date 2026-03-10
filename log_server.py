@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
-from datetime import datetime
+import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 from db import get_session, init_db
 from models import LogEntryModel
@@ -18,7 +18,8 @@ async def receive_log(entry: LogEntry, session: AsyncSession = Depends(get_sessi
     log_record = LogEntryModel(
         application=entry.application,
         level=entry.level.upper(),
-        message=entry.message
+        message=entry.message,
+        ins_date=datetime.datetime.now(tz=datetime.timezone.utc)
     )
     session.add(log_record)
     await session.commit()
