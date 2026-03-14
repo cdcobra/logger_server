@@ -1,10 +1,20 @@
 import logging, os, dotenv, requests
 
+# Instalacja:
+# pip install python-dotenv requests
+# git submodule add https://github.com/cdcobra/logger_server logger_server
+# git submodule update --init --recursive
+
 # Dodaj do .env:
 # LOGGER_HOST=localhost
 # LOGGER_PORT=8000
 # LOGGER_LEVEL=DEBUG
 # APP_NAME=your_app_name
+
+# Przykład użycia:
+# from logger_server.setup_logger import setup_logging
+# logger = setup_logging("app.main")
+# logger.info("This is an info message")
 
 class WebhookHandler(logging.Handler):
     def __init__(self, level=logging.NOTSET):
